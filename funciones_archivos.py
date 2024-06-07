@@ -1,6 +1,12 @@
 import json
 
 def leer_json(nombre_archivo:str,primer_item:str)->list:
+    '''
+    Lee los datos de un json cuando tienen un item principal
+    Parametros:nombre_archivo:str => nombre del archivo a leer
+                primer_item:str => nombre del item principal
+    Retorno: List si funciona, False si hubo error
+    '''
     try:
 
         with open(nombre_archivo,"r") as archivo:
@@ -11,9 +17,35 @@ def leer_json(nombre_archivo:str,primer_item:str)->list:
         return False
     except KeyError:
         print("El archivo no contiene la key solicitada")
+        
+def leer_json_lista(nombre_archivo:str)->list:
+    '''
+    Lee los datos de un json sin item principal
+    Parametros:nombre_archivo:str => nombre del archivo a leer
+    Retorno: List si funciona, False si hubo error    
+    '''
+    try:
 
-# lista = leer_json("data_stark.json","heroes")
-
+        with open(nombre_archivo,"r") as archivo:
+            item = json.load(archivo)
+        return item
+    except FileNotFoundError:
+        print("El archivo no existe")
+        return False
+    except KeyError:
+        print("El archivo no contiene la key solicitada")
+        
+def guardar_json_lista(nombre_archivo:str,datos:list)->list:
+    try:
+        with open(nombre_archivo,"w+") as archivo:
+                json.dump(datos,archivo)
+                print("Se creó el archivo:",nombre_archivo)
+                return True
+    except KeyError:
+        print("El archivo no contiene la key solicitada")
+        return False
+    except:
+        return False
 
 
 def guardar_archivo(nombre_archivo:str,datos:str):
