@@ -24,31 +24,43 @@ def leer_json_lista(nombre_archivo:str)->list:
     Parametros:nombre_archivo:str => nombre del archivo a leer
     Retorno: List si funciona, False si hubo error    
     '''
-    try:
-
-        with open(nombre_archivo,"r") as archivo:
-            item = json.load(archivo)
-        return item
-    except FileNotFoundError:
-        print("El archivo no existe")
+    if len(nombre_archivo) > 0:
+        try:
+            with open(nombre_archivo,"r") as archivo:
+                item = json.load(archivo)
+            return item
+        except FileNotFoundError:
+            print("El archivo no existe")
+            return False
+        except KeyError:
+            print("El archivo no contiene la key solicitada")
+    else:
         return False
-    except KeyError:
-        print("El archivo no contiene la key solicitada")
-        
-def guardar_json_lista(nombre_archivo:str,datos:list)->list:
-    try:
-        with open(nombre_archivo,"w+") as archivo:
-                json.dump(datos,archivo)
-                print("Se creó el archivo:",nombre_archivo)
-                return True
-    except KeyError:
-        print("El archivo no contiene la key solicitada")
-        return False
-    except:
-        return False
+    
+def guardar_json_lista(nombre_archivo:str,datos:list)->bool:
+    '''
+    Guarda un archivo en formato json
+    Parametros:nombre_archivo:str => nombre del archivo a leer
+            datos:list => lista con los datos a guardar
+    Retorno: bool => True si todo funciono, False si hubo error
+    '''
+    retorno = False
+    if len(nombre_archivo) >0 and len(datos)>0:
+        try:
+            with open(nombre_archivo,"w+") as archivo:
+                    json.dump(datos,archivo)
+                    print("Se creó el archivo:",nombre_archivo)
+                    retorno = True
+        except KeyError:
+            print("El archivo no contiene la key solicitada")
+            return False
+        except:
+            return False
+    else:
+        retorno = False
+    return retorno
 
-
-def guardar_archivo(nombre_archivo:str,datos:str):
+def guardar_archivo(nombre_archivo:str,datos:str)->bool:
     '''
     genera archivo csv segun los datos pasados
     Parametros: nombre_archivo:str

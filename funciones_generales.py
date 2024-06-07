@@ -160,8 +160,14 @@ def agrupar(lista:list,key:str)->dict:
     return aux
                 
 def filtrar(lista:list,key:str,condicion:str):
+    '''
+    crea una sublista segun una key y condicion
+    Parametros: lista:list => lista a filtrar
+                key:str => key a buscar
+                condicion:str => condicion a comparar
+    '''
     sublista = []
-    if len(lista) > 0 and len(key)>0 and len(condicion) >0:
+    if len(lista) > 0 and len(key) > 0 and len(condicion) > 0:
         for item in lista:
             if item[key] == condicion:
                 sublista.append(item)
