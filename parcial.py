@@ -12,10 +12,6 @@ while True:
     else:
         match opcion:
             case 1:
-                keys = ["id_servicio","descripcion","tipo",
-                        "precioUnitario",
-                        "cantidad",
-                        "totalServicio"]
                 datos = leer_json_lista("data.json")
                 if datos:
                     print("Datos importados de forma exitosa")
@@ -27,10 +23,6 @@ while True:
                         "totalServicio"]
                 mostrar_todos_los_datos(datos,keys)
             case 3:
-                keys = ["id_servicio","descripcion","tipo",
-                        "precioUnitario",
-                        "cantidad",
-                        "totalServicio"]
                 for item in datos:
                     item["totalServicio"] = (lambda cant,precio: cant *
                                              precio)(float(item["cantidad"]),
